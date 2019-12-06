@@ -5,7 +5,7 @@ Brick::Brick(const Rectf& pRect, Color pC)
 {
 }
 
-void Brick::Draw(Graphics& gfx)
+void Brick::Draw(Graphics& gfx) const
 {
 	gfx.DrawRect(position, c);
 }

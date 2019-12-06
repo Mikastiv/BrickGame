@@ -13,5 +13,5 @@ private:
 public:
 	Brick() = default;
 	Brick(const Rectf& pRect, Color pC);
-	void Draw(Graphics& gfx);
+	void Draw(Graphics& gfx) const;
 };
