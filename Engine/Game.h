@@ -24,6 +24,7 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "FrameTimer.h"
+#include "Brick.h"
 
 class Game
 {
