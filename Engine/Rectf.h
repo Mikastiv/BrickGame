@@ -12,7 +12,7 @@ public:
 
 public:
 	Rectf() = default;
-	Rectf(float pTop, float pLeft, float pBottom, float pRight);
+	Rectf(float pLeft, float pTop, float pRight, float pBottom);
 	Rectf(const Vec2& pTopleft, const Vec2& pBottomRight);
 	Rectf(const Vec2& pTopleft, float pWidth, float pHeight);
 };

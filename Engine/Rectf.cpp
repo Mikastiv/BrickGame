@@ -1,12 +1,12 @@
 #include "Rectf.h"
 
-Rectf::Rectf(float pTop, float pLeft, float pBottom, float pRight)
+Rectf::Rectf(float pLeft, float pTop, float pRight, float pBottom)
 	: top(pTop), left(pLeft), bottom(pBottom), right(pRight)
 {
 }
 
 Rectf::Rectf(const Vec2& pTopleft, const Vec2& pBottomRight)
-	: Rectf(pTopleft.y, pTopleft.x, pTopleft.y, pTopleft.x)
+	: Rectf(pTopleft.x, pTopleft.y, pBottomRight.x, pBottomRight.y)
 {
 }
 
