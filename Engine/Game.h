@@ -47,5 +47,6 @@ private:
 	/*  User Variables              */
 	FrameTimer ft;
 	Ball ball;
+	Rectf walls;
 	/********************************/
 };
