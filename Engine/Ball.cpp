@@ -26,26 +26,26 @@ bool Ball::DoWallCollision(const Rectf& pWalls)
 	bool hasCollided = false;
 	Rectf boxCollider = GetBoxCollider();
 
-	if (boxCollider.left < pWalls.left)
+	if (boxCollider.left <= pWalls.left)
 	{
 		BounceX();
 		center.x += pWalls.left - boxCollider.left;
 		hasCollided = true;
 	}
-	else if (boxCollider.right > pWalls.right)
+	else if (boxCollider.right >= pWalls.right)
 	{
 		BounceX();
 		center.x -= boxCollider.right - pWalls.right;
 		hasCollided = true;
 	}
 	
-	if (boxCollider.top < pWalls.top)
+	if (boxCollider.top <= pWalls.top)
 	{
 		BounceY();
 		center.y += pWalls.top - boxCollider.top;
 		hasCollided = true;
 	}
-	else if (boxCollider.bottom > pWalls.bottom)
+	else if (boxCollider.bottom >= pWalls.bottom)
 	{
 		BounceY();
 		center.y -= boxCollider.bottom - pWalls.bottom;
@@ -63,4 +63,9 @@ void Ball::BounceX()
 void Ball::BounceY()
 {
 	velocity.y = -velocity.y;
+}
+
+const Vec2& Ball::GetVelocity() const
+{
+	return velocity;
 }

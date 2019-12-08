@@ -19,4 +19,5 @@ public:
 	bool DoWallCollision(const Rectf& pWalls);
 	void BounceX();
 	void BounceY();
+	const Vec2& GetVelocity() const;
 };
