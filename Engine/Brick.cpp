@@ -1,11 +1,23 @@
 #include "Brick.h"
 
 Brick::Brick(const Rectf& pRect, Color pC)
-	: position(pRect), c(pC)
+	: boxCollider(pRect), c(pC)
 {
 }
 
 void Brick::Draw(Graphics& gfx) const
 {
-	gfx.DrawRect(position, c);
+	if (!destroyed) gfx.DrawRect(boxCollider.ExpendedRect(-padding), c);
+}
+
+bool Brick::DoBallCollision(Ball& ball)
+{
+	Rectf ballCollider = ball.GetBoxCollider();
+	if (!destroyed && boxCollider.IsOverlapping(ballCollider))
+	{
+		ball.BounceY();
+		destroyed = true;
+		return true;
+	}
+	return false;
 }
