@@ -27,6 +27,7 @@
 #include "Brick.h"
 #include "Ball.h"
 #include "Sound.h"
+#include "Paddle.h"
 
 class Game
 {
@@ -52,11 +53,15 @@ private:
 	static constexpr float BRICK_WIDTH = 50.0f;
 	static constexpr float BRICK_HEIGHT = 25.0f;
 	static constexpr float BALL_SPEED = 300.0f;
+	static constexpr float PADDLE_WIDTH = 100.0f;
+	static constexpr float PADDLE_HEIGHT = 30.0f;
+	static constexpr float PADDLE_SPEED = 300.0f;
 
 	FrameTimer ft;
 	Ball ball;
 	Rectf walls;
 	Brick bricks[NUMBER_BRICKS];
+	Paddle paddle;
 	Sound soundPad;
 	Sound soundBrick;
 	/********************************/

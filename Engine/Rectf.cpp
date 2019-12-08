@@ -24,3 +24,8 @@ Rectf Rectf::ExpendedRect(float padding) const
 {
 	return Rectf(left - padding, top - padding, right + padding, bottom + padding);
 }
+
+Rectf Rectf::FromCenter(Vec2 center, float halfWidth, float halfHeight)
+{
+	return Rectf(Vec2(center.x - halfWidth, center.y - halfHeight), Vec2(center.x + halfWidth, center.y + halfHeight));
+}
