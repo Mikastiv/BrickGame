@@ -46,9 +46,18 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	static constexpr int NUMBER_BRICKS_ACROSS = 15;
+	static constexpr int NUMBER_BRICKS_DOWN = 6;
+	static constexpr int NUMBER_BRICKS = NUMBER_BRICKS_ACROSS * NUMBER_BRICKS_DOWN;
+	static constexpr float BRICK_WIDTH = 50.0f;
+	static constexpr float BRICK_HEIGHT = 25.0f;
+	static constexpr float BALL_SPEED = 300.0f;
+
 	FrameTimer ft;
 	Ball ball;
 	Rectf walls;
+	Brick bricks[NUMBER_BRICKS];
 	Sound soundPad;
+	Sound soundBrick;
 	/********************************/
 };
