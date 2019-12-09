@@ -25,6 +25,7 @@ public:
 	Rectf GetRect() const;
 	bool DoWallCollision(const Rectf& walls);
 	bool DoBallCollision(Ball& ball) const;
+	void SetPosition(float x);
 
 private:
 	Vec2 GetTopLeft() const;

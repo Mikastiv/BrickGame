@@ -63,6 +63,8 @@ void Game::UpdateModel(float dt)
 	ball.Update(dt);
 	paddle.Update(wnd.kbd, dt);
 
+	paddle.SetPosition(ball.GetCenter().x);
+
 	float shortestCollisionDistSq;
 	size_t shortestCollisionIndex;
 	bool hasCollided = false;

@@ -75,3 +75,8 @@ bool Paddle::DoBallCollision(Ball& ball) const
 
 	return hasCollided;
 }
+
+void Paddle::SetPosition(float x)
+{
+	center.x = x;
+}
