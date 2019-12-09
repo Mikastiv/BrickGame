@@ -24,7 +24,7 @@ Rectf Ball::GetBoxCollider() const
 bool Ball::DoWallCollision(const Rectf& pWalls)
 {
 	bool hasCollided = false;
-	Rectf boxCollider = GetBoxCollider();
+	const Rectf boxCollider = GetBoxCollider();
 
 	if (boxCollider.left <= pWalls.left)
 	{
@@ -68,4 +68,14 @@ void Ball::BounceY()
 const Vec2& Ball::GetVelocity() const
 {
 	return velocity;
+}
+
+const Vec2& Ball::GetCenter() const
+{
+	return center;
+}
+
+void Ball::AddToPosition(const Vec2& v)
+{
+	center += v;
 }

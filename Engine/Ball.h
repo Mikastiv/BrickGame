@@ -20,4 +20,6 @@ public:
 	void BounceX();
 	void BounceY();
 	const Vec2& GetVelocity() const;
+	const Vec2& GetCenter() const;
+	void AddToPosition(const Vec2& v);
 };

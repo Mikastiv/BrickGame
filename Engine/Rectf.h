@@ -16,6 +16,7 @@ public:
 	Rectf(const Vec2& pTopleft, const Vec2& pBottomRight);
 	Rectf(const Vec2& pTopleft, float pWidth, float pHeight);
 	bool IsOverlapping(const Rectf& other) const;
-	Rectf ExpendedRect(float padding) const;
+	Rectf GetExpendedRect(float padding) const;
+	Vec2 GetCenterPosition() const;
 	static Rectf FromCenter(Vec2 center, float halfWidth, float halfHeight);
 };

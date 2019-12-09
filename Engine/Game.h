@@ -38,7 +38,7 @@ public:
 	void Go();
 private:
 	void ComposeFrame();
-	void UpdateModel();
+	void UpdateModel(float dt);
 	/********************************/
 	/*  User Functions              */
 	/********************************/
@@ -47,6 +47,7 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	static constexpr float UPDATE_REFRESH_RATE = 0.0025f;
 	static constexpr int NUMBER_BRICKS_ACROSS = 15;
 	static constexpr int NUMBER_BRICKS_DOWN = 6;
 	static constexpr int NUMBER_BRICKS = NUMBER_BRICKS_ACROSS * NUMBER_BRICKS_DOWN;

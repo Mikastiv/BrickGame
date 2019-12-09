@@ -7,7 +7,7 @@ Paddle::Paddle(Vec2 pCenter, float pWidth, float pHeight, float pSpeed)
 
 void Paddle::Draw(Graphics& gfx) const
 {
-	float wingsWidth = width / 7.0f;
+	const float wingsWidth = width / 7.0f;
 	gfx.DrawRect(GetRect(), c);
 	gfx.DrawRect(Rectf(GetTopLeft() + Vec2(wingsWidth / 2.0f, 0.0f), wingsWidth, height), wingsColor);
 	gfx.DrawRect(Rectf(GetTopRight() - Vec2(1.5f * wingsWidth, 0.0f), wingsWidth, height), wingsColor);
@@ -43,7 +43,7 @@ Vec2 Paddle::GetTopRight() const
 bool Paddle::DoWallCollision(const Rectf& walls)
 {
 	bool hasCollided = false;
-	Rectf boxCollider = GetRect();
+	const Rectf boxCollider = GetRect();
 
 	if (boxCollider.left <= walls.left)
 	{
@@ -62,7 +62,7 @@ bool Paddle::DoWallCollision(const Rectf& walls)
 bool Paddle::DoBallCollision(Ball& ball) const
 {
 	bool hasCollided = false;
-	Rectf boxCollider = GetRect();
+	const Rectf boxCollider = GetRect();
 
 	if (ball.GetVelocity().y > 0.0f)
 	{

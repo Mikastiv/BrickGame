@@ -47,24 +47,51 @@ Game::Game( MainWindow& wnd )
 void Game::Go()
 {
 	gfx.BeginFrame();	
-	UpdateModel();
+	float elapsedTime = ft.Mark();
+	while (elapsedTime > 0.0f)
+	{
+		float dt = std::min(UPDATE_REFRESH_RATE, elapsedTime);
+		UpdateModel(dt);
+		elapsedTime -= dt;
+	}
 	ComposeFrame();
 	gfx.EndFrame();
 }
 
-void Game::UpdateModel()
+void Game::UpdateModel(float dt)
 {
-	float dt = ft.Mark();
 	ball.Update(dt);
 	paddle.Update(wnd.kbd, dt);
 
-	for (Brick& b : bricks)
+	float shortestCollisionDistSq;
+	size_t shortestCollisionIndex;
+	bool hasCollided = false;
+	for (size_t i = 0; i < NUMBER_BRICKS; i++)
 	{
-		if (b.DoBallCollision(ball))
+		if (bricks[i].CheckBallCollision(ball))
 		{
-			soundBrick.Play();
-			break;
+			const float currentDistSq = (bricks[i].GetCenterPosition() - ball.GetCenter()).GetLengthSq();
+			if (!hasCollided)
+			{
+				shortestCollisionDistSq = currentDistSq;
+				shortestCollisionIndex = i;
+				hasCollided = true;
+			}
+			else
+			{
+				if (currentDistSq < shortestCollisionDistSq)
+				{
+					shortestCollisionIndex = i;
+					shortestCollisionDistSq = currentDistSq;
+				}
+			}
 		}
+	}
+
+	if (hasCollided)
+	{
+		bricks[shortestCollisionIndex].ExecuteBallCollision(ball);
+		soundBrick.Play();
 	}
 
 	paddle.DoWallCollision(walls);

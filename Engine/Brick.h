@@ -15,9 +15,14 @@ private:
 	bool destroyed = false;
 
 public:
-	Brick() = default;
+	Brick();
 	Brick(const Rectf& pRect, Color pC);
 	void Draw(Graphics& gfx) const;
-	bool DoBallCollision(Ball& ball);
+	bool CheckBallCollision(Ball& ball) const;
+	void ExecuteBallCollision(Ball& ball);
+	Vec2 GetCenterPosition() const;
 
+private:
+	void PushBallOutsideBrickY(Ball& ball) const;
+	void PushBallOutsideBrickX(Ball& ball) const;
 };
