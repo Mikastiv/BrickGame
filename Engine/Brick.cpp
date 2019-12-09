@@ -75,10 +75,10 @@ void Brick::PushBallOutsideBrickX(Ball& ball) const
 	const Rectf ballCollider = ball.GetBoxCollider();
 	if (ballCollider.left <= boxCollider.left)
 	{
-		ball.AddToPosition(Vec2(ballCollider.left - boxCollider.left, 0.0f));
+		ball.AddToPosition(Vec2(ballCollider.right - boxCollider.left, 0.0f));
 	}
-	else
+	else if (ballCollider.right >= boxCollider.right)
 	{
-		ball.AddToPosition(Vec2(boxCollider.right - ballCollider.right, 0.0f));
+		ball.AddToPosition(Vec2(boxCollider.right - ballCollider.left, 0.0f));
 	}
 }

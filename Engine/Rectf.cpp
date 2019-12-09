@@ -20,7 +20,7 @@ Rectf::Rectf(const Vec2& pTopleft, float pWidth, float pHeight)
 
 bool Rectf::IsOverlapping(const Rectf& other) const
 {
-	return left < other.right && right > other.left && top < other.bottom && bottom > other.top;
+	return left <= other.right && right >= other.left && top <= other.bottom && bottom >= other.top;
 }
 
 Rectf Rectf::GetExpendedRect(float padding) const
