@@ -65,6 +65,6 @@ private:
 	Paddle paddle;
 	Sound soundPad;
 	Sound soundBrick;
-	std::vector<Ball> balls;
+	std::vector<Ball*> balls;
 	/********************************/
 };

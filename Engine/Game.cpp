@@ -44,7 +44,7 @@ Game::Game( MainWindow& wnd )
 
 	for (size_t i = 0; i < 1; i++)
 	{
-		balls.push_back(Ball(Vec2(100.0f, 500.0f), Vec2(1.0f * BALL_SPEED, 1.0f * BALL_SPEED)));
+		balls.push_back(new Ball(Vec2(100.0f, 500.0f), Vec2(1.0f * BALL_SPEED, 1.0f * BALL_SPEED)));
 	}
 }
 
@@ -64,9 +64,9 @@ void Game::Go()
 
 void Game::UpdateModel(float dt)
 {
-	for (Ball& ball : balls)
+	for (Ball* ball : balls)
 	{
-		ball.Update(dt);
+		ball->Update(dt);
 		paddle.Update(wnd.kbd, dt);
 
 		float shortestCollisionDistSq;
@@ -74,9 +74,9 @@ void Game::UpdateModel(float dt)
 		bool hasCollided = false;
 		for (size_t i = 0; i < NUMBER_BRICKS; i++)
 		{
-			if (bricks[i].CheckBallCollision(ball))
+			if (bricks[i].CheckBallCollision(*ball))
 			{
-				const float currentDistSq = (bricks[i].GetCenterPosition() - ball.GetCenter()).GetLengthSq();
+				const float currentDistSq = (bricks[i].GetCenterPosition() - ball->GetCenter()).GetLengthSq();
 				if (!hasCollided)
 				{
 					shortestCollisionDistSq = currentDistSq;
@@ -96,7 +96,7 @@ void Game::UpdateModel(float dt)
 
 		if (hasCollided)
 		{
-			bricks[shortestCollisionIndex].ExecuteBallCollision(ball);
+			bricks[shortestCollisionIndex].ExecuteBallCollision(*ball);
 			paddle.ResetCooldown();
 			soundBrick.Play();
 		}
@@ -104,24 +104,26 @@ void Game::UpdateModel(float dt)
 		bool ballCollidedWall = false;
 		bool ballCollidedPaddle = false;
 
-		if (ballCollidedPaddle = paddle.DoBallCollision(ball)) soundPad.Play();
+		if (ballCollidedPaddle = paddle.DoBallCollision(*ball)) soundPad.Play();
 
 		if (paddle.DoWallCollision(walls)) paddle.ResetCooldown();
 
-		if (ballCollidedWall = ball.DoWallCollision(walls))
+		if (ballCollidedWall = ball->DoWallCollision(walls))
 		{
 			paddle.ResetCooldown();
 			soundPad.Play();
 		}
+
+		//if (ballCollidedPaddle && ballCollidedWall) delete ball;
 	}
 	
 }
 
 void Game::ComposeFrame()
 {
-	for (Ball& ball : balls)
+	for (Ball* ball : balls)
 	{
-		ball.Draw(gfx);
+		ball->Draw(gfx);
 	}
 	paddle.Draw(gfx);
 	for (const Brick& b : bricks) b.Draw(gfx);
