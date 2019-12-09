@@ -22,7 +22,4 @@ public:
 	void ExecuteBallCollision(Ball& ball);
 	Vec2 GetCenterPosition() const;
 
-private:
-	void PushBallOutsideBrickY(Ball& ball) const;
-	void PushBallOutsideBrickX(Ball& ball) const;
 };

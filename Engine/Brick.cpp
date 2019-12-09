@@ -28,20 +28,21 @@ void Brick::ExecuteBallCollision(Ball& ball)
 	assert(boxCollider.IsOverlapping(ball.GetBoxCollider()));
 
 	const Vec2 ballCenter = ball.GetCenter();
+	const Rectf ballCollider = ball.GetBoxCollider();
 	if (std::signbit(ball.GetVelocity().x) == std::signbit((ballCenter - GetCenterPosition()).x))
 	{
 		ball.BounceY();
-		PushBallOutsideBrickY(ball);
+		ball.AddToPosition(boxCollider.VecToPushOutsideRectY(ballCollider));
 	}
 	else if (ballCenter.x >= boxCollider.left && ballCenter.x <= boxCollider.right)
 	{
 		ball.BounceY();
-		PushBallOutsideBrickY(ball);
+		ball.AddToPosition(boxCollider.VecToPushOutsideRectY(ballCollider));
 	}
 	else
 	{
 		ball.BounceX();
-		PushBallOutsideBrickX(ball);
+		ball.AddToPosition(boxCollider.VecToPushOutsideRectX(ballCollider));
 	}
 	destroyed = true;
 }
@@ -49,36 +50,4 @@ void Brick::ExecuteBallCollision(Ball& ball)
 Vec2 Brick::GetCenterPosition() const
 {
 	return boxCollider.GetCenterPosition();
-}
-
-void Brick::PushBallOutsideBrickY(Ball& ball) const
-{
-	assert(!destroyed);
-	assert(boxCollider.IsOverlapping(ball.GetBoxCollider()));
-
-	const Rectf ballCollider = ball.GetBoxCollider();
-	if (ballCollider.top <= boxCollider.top)
-	{
-		ball.AddToPosition(Vec2(0.0f, ballCollider.bottom - boxCollider.top));
-	}
-	else if (ballCollider.bottom >= boxCollider.bottom)
-	{
-		ball.AddToPosition(Vec2(0.0f, boxCollider.bottom - ballCollider.top));
-	}
-}
-
-void Brick::PushBallOutsideBrickX(Ball& ball) const
-{
-	assert(!destroyed);
-	assert(boxCollider.IsOverlapping(ball.GetBoxCollider()));
-
-	const Rectf ballCollider = ball.GetBoxCollider();
-	if (ballCollider.left <= boxCollider.left)
-	{
-		ball.AddToPosition(Vec2(ballCollider.right - boxCollider.left, 0.0f));
-	}
-	else if (ballCollider.right >= boxCollider.right)
-	{
-		ball.AddToPosition(Vec2(boxCollider.right - ballCollider.left, 0.0f));
-	}
 }

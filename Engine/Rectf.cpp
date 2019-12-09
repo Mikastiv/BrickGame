@@ -33,6 +33,34 @@ Vec2 Rectf::GetCenterPosition() const
 	return Vec2((left + right) / 2.0f, (top + bottom) / 2.0f);
 }
 
+Vec2 Rectf::VecToPushOutsideRectY(const Rectf& rect) const
+{
+	if (rect.top <= top)
+	{
+		return Vec2(0.0f, rect.bottom - top);
+	}
+	else if (rect.bottom >= bottom)
+	{
+		return Vec2(0.0f, bottom - rect.top);
+	}
+
+	return Vec2(0.0f, 0.0f);
+}
+
+Vec2 Rectf::VecToPushOutsideRectX(const Rectf& rect) const
+{
+	if (rect.left <= left)
+	{
+		return Vec2(rect.right - left, 0.0f);
+	}
+	else if (rect.right >= right)
+	{
+		return Vec2(right - rect.left, 0.0f);
+	}
+
+	return Vec2(0.0f, 0.0f);
+}
+
 Rectf Rectf::FromCenter(Vec2 center, float halfWidth, float halfHeight)
 {
 	return Rectf(Vec2(center.x - halfWidth, center.y - halfHeight), Vec2(center.x + halfWidth, center.y + halfHeight));
