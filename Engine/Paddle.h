@@ -26,7 +26,6 @@ public:
 	Rectf GetRect() const;
 	bool DoWallCollision(const Rectf& walls);
 	bool DoBallCollision(Ball& ball);
-	void SetPosition(float x);
 	void ResetCooldown();
 
 private:

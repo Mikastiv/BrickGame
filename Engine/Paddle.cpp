@@ -90,11 +90,6 @@ bool Paddle::DoBallCollision(Ball& ball)
 	return hasCollided;
 }
 
-void Paddle::SetPosition(float x)
-{
-	center.x = x;
-}
-
 void Paddle::ResetCooldown()
 {
 	bounceCooldown = false;
