@@ -17,6 +17,7 @@ private:
 	float speed;
 	Color c = Colors::White;
 	Color wingsColor = Colors::Red;
+	bool bounceCooldown = false;
 
 public:
 	Paddle(Vec2 pCenter, float pWidth, float pHeight, float pSpeed);
@@ -24,8 +25,9 @@ public:
 	void Update(const Keyboard& kbd, float deltatime);
 	Rectf GetRect() const;
 	bool DoWallCollision(const Rectf& walls);
-	bool DoBallCollision(Ball& ball) const;
+	bool DoBallCollision(Ball& ball);
 	void SetPosition(float x);
+	void ResetCooldown();
 
 private:
 	Vec2 GetTopLeft() const;

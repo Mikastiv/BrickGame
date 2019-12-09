@@ -1,4 +1,5 @@
 #include "Paddle.h"
+#include <cmath>
 
 Paddle::Paddle(Vec2 pCenter, float pWidth, float pHeight, float pSpeed)
 	: center(pCenter), width(pWidth), height(pHeight), halfWidth(width / 2.0f), halfHeight(height / 2.0f), speed(pSpeed)
@@ -59,17 +60,30 @@ bool Paddle::DoWallCollision(const Rectf& walls)
 	return hasCollided;
 }
 
-bool Paddle::DoBallCollision(Ball& ball) const
+bool Paddle::DoBallCollision(Ball& ball)
 {
 	bool hasCollided = false;
 	const Rectf boxCollider = GetRect();
 
-	if (ball.GetVelocity().y > 0.0f)
+	if (!bounceCooldown)
 	{
 		if (boxCollider.IsOverlapping(ball.GetBoxCollider()))
 		{
+			const Vec2 ballCenter = ball.GetCenter();
+			if (std::signbit(ball.GetVelocity().x) == std::signbit((ballCenter - center).x))
+			{
+				ball.BounceY();
+			}
+			else if (ballCenter.x >= boxCollider.left && ballCenter.x <= boxCollider.right)
+			{
+				ball.BounceY();
+			}
+			else
+			{
+				ball.BounceX();
+			}
 			hasCollided = true;
-			ball.BounceY();
+			bounceCooldown = true;
 		}
 	}
 
@@ -79,4 +93,9 @@ bool Paddle::DoBallCollision(Ball& ball) const
 void Paddle::SetPosition(float x)
 {
 	center.x = x;
+}
+
+void Paddle::ResetCooldown()
+{
+	bounceCooldown = false;
 }
