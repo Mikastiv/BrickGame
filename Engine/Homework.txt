@@ -1,0 +1,7 @@
+Make paddle rebound angle vary
+Game over when hit bottom of screen
+Adjust wall dimensions / paddle / size of bricks
+Draw border to show walls
+Implement lives system
+Title screen / game over screen
+Paddle sprite (not shown in solution video) / brick shading
