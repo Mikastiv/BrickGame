@@ -31,8 +31,8 @@ Game::Game( MainWindow& wnd )
 	soundPad(L"Sounds\\arkpad.wav"),
 	soundBrick(L"Sounds\\arkbrick.wav")
 {
-	Color colors[NUMBER_BRICKS_DOWN] = { Colors::Cyan, Colors::Green, Colors::Magenta, Colors::Yellow, Colors::LightGray, Colors::Red };
-	Vec2 topLeftBricksArray = {25.0f, 25.0f};
+	const Color colors[NUMBER_BRICKS_DOWN] = { Colors::Cyan, Colors::Green, Colors::Magenta, Colors::Yellow, Colors::LightGray, Colors::Red };
+	const Vec2 topLeftBricksArray = {25.0f, 25.0f};
 
 	for (size_t y = 0; y < NUMBER_BRICKS_DOWN; y++)
 	{
@@ -50,7 +50,7 @@ void Game::Go()
 	float elapsedTime = ft.Mark();
 	while (elapsedTime > 0.0f)
 	{
-		float dt = std::min(UPDATE_REFRESH_RATE, elapsedTime);
+		const float dt = std::min(UPDATE_REFRESH_RATE, elapsedTime);
 		UpdateModel(dt);
 		elapsedTime -= dt;
 	}
