@@ -28,6 +28,7 @@
 #include "Ball.h"
 #include "Sound.h"
 #include "Paddle.h"
+#include <vector>
 
 class Game
 {
@@ -59,11 +60,11 @@ private:
 	static constexpr float PADDLE_SPEED = 400.0f;
 
 	FrameTimer ft;
-	Ball ball;
 	Rectf walls;
 	Brick bricks[NUMBER_BRICKS];
 	Paddle paddle;
 	Sound soundPad;
 	Sound soundBrick;
+	std::vector<Ball> balls;
 	/********************************/
 };
